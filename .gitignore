@@ -12,5 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+coverage
+.env
 
 .byebug_history
