@@ -1,9 +1,10 @@
 RSpec.describe "User Sessions", type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:credentials) { user.create_new_auth_token }
-  let(:headers) { {  HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
+  let(:headers) { {  HTTP_ACCEPT: 'application/json' } }
+  let(:headers2) { {  HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
 
-  context "valid credentials" do
+  context "valid credentials & logout" do
     it "successfully logs in user" do
       post "/api/v1/auth/sign_in", params: {
       	email: user.email, password: user.password      
@@ -12,6 +13,13 @@ RSpec.describe "User Sessions", type: :request do
       expect(response.status).to eq 200
       expected_response = eval(file_fixture('success_login.txt').read)
       expect(response_json).to eq expected_response.as_json
+    end
+
+    it "successfully logs out user" do
+      delete "/api/v1/auth/sign_out", headers: headers2
+
+      binding.pry
+      expect(response.status).to eq 200
     end
   end
 
