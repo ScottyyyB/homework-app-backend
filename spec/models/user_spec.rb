@@ -18,6 +18,7 @@ RSpec.describe User, type: :model do
   	it { is_expected.to have_db_column :confirmation_sent_at }
   	it { is_expected.to have_db_column :unconfirmed_email }
   	it { is_expected.to have_db_column :email }
+    it { is_expected.to have_db_column :name }
   	it { is_expected.to have_db_column :tokens }
   	it { is_expected.to have_db_column :created_at }
   	it { is_expected.to have_db_column :updated_at }
@@ -28,9 +29,8 @@ RSpec.describe User, type: :model do
   describe "Validations" do
   	it { is_expected.to validate_presence_of :email }
   	it { is_expected.to validate_presence_of :password }
-  	it { is_expected.to validate_presence_of :username }
+  	it { is_expected.to validate_presence_of :name }
   	it { is_expected.to validate_confirmation_of :password }
-  	it { is_expected.to validate_uniqueness_of :username }
   	it { is_expected.to validate_inclusion_of(:teacher).in_array([true, false]) }
   	it { is_expected.to validate_inclusion_of(:student).in_array([true, false]) }
   end
