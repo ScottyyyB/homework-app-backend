@@ -18,7 +18,6 @@ RSpec.describe "User Sessions", type: :request do
     it "successfully logs out user" do
       delete "/api/v1/auth/sign_out", headers: headers2
 
-      binding.pry
       expect(response.status).to eq 200
     end
   end
