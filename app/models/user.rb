@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  validates :username, uniqueness: true
-  validates :username, presence: true
+  validates :name, uniqueness: true
+  validates :name, presence: true
   validates :teacher, :student, inclusion: { in: [true, false] }
 
   devise :database_authenticatable, :registerable,

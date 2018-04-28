@@ -34,7 +34,7 @@
       # t.datetime :locked_at
 
       ## User Info
-      t.string :username
+      t.string :name
       t.string :email
 
       ## Tokens
