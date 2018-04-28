@@ -1,0 +1,1 @@
+{"data"=>{"id"=>User.first.id, "email"=>"random@gmail.com", "name"=>"#{User.first.name}", "teacher"=>false, "student"=>false, "provider"=>"email", "uid"=>"random@gmail.com"}}
