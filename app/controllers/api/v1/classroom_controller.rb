@@ -4,13 +4,8 @@ class Api::V1::ClassroomController < ApplicationController
   	if classroom.save
       render status: 200
     else
-      if classroom.errors.first[0] != :user_ids
   	   render json: { errors: classroom.errors.full_messages},
               status: 422
-      else
-        render json: { errors: classroom.errors.first[1] },
-               status: 422
-      end
   	end
   end
 
@@ -26,15 +21,9 @@ class Api::V1::ClassroomController < ApplicationController
     if classroom.update(classroom_params) 
       render status: 200
     else
-      if classroom.errors.first[0] != :user_ids
        render json: { errors: classroom.errors.full_messages},
               status: 422
-      else
-        render json: { errors: classroom.errors.first[1] },
-               status: 422
-      end
     end
-    binding.pry
   end
 
   private

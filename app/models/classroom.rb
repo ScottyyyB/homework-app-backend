@@ -3,8 +3,7 @@ class Classroom < ApplicationRecord
   has_many :students
   has_many :users, through: :students
 
-  validates :teacher_id, presence: true
-  validates_presence_of :user_ids, :message => "Students must be added" 
+  validates :teacher_id, :user_ids, presence: true
 
   validates :name, :grade, presence: true
 end

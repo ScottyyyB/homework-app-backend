@@ -52,7 +52,7 @@ RSpec.describe Api::V1::ClassroomController, type: :request do
         }, headers: headers
         
         expect(response.status).to eq 422
-        expect(response_json['errors']).to eq "Students must be added"
+        expect(response_json['errors'][0]).to eq "User ids can't be blank"
       end
     end
   end
@@ -103,7 +103,7 @@ RSpec.describe Api::V1::ClassroomController, type: :request do
          }, headers: headers
 
         expect(response.status).to eq 422
-        expect(response_json["errors"]).to eq "Students must be added"
+        expect(response_json["errors"][0]).to eq "User ids can't be blank"
       end
     end
   end
