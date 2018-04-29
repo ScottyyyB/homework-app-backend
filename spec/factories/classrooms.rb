@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :classroom do
-    grade "MyString"
-    name "MyString"
+    grade 10
+    name "Math"
   end
 end

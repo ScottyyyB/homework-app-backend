@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20180429104927) do
   enable_extension "plpgsql"
 
   create_table "classrooms", force: :cascade do |t|
-    t.string "grade"
+    t.integer "grade"
     t.string "name"
     t.integer "teacher_id"
     t.datetime "created_at", null: false
