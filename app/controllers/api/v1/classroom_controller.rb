@@ -1,4 +1,6 @@
 class Api::V1::ClassroomController < ApplicationController
+  before_action :authenticate_api_v1_user!
+
   def create
   	classroom = current_api_v1_user.classrooms.new(classroom_params)
   	if classroom.save
@@ -23,6 +25,19 @@ class Api::V1::ClassroomController < ApplicationController
     else
        render json: { errors: classroom.errors.full_messages},
               status: 422
+    end
+  end
+
+  def index
+    if current_api_v1_user.student
+      classrooms = []
+      Student.where(:user_id => current_api_v1_user.id).each do |student|
+        classrooms << student.classroom
+      end
+      render json: classrooms, each_serializer: ClassroomSerializer
+    else
+      classrooms = current_api_v1_user.classrooms
+      render json: classrooms, each_serializer: ClassroomSerializer
     end
   end
 
