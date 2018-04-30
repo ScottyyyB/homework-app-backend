@@ -1,4 +1,6 @@
 class Api::V1::ClassroomController < ApplicationController
+  before_action :authenticate_api_v1_user!
+
   def create
   	classroom = current_api_v1_user.classrooms.new(classroom_params)
   	if classroom.save

@@ -4,6 +4,7 @@ RSpec.describe Api::V1::ClassroomController, type: :request do
   let(:student_credentials) { User.first.create_new_auth_token }
   let(:headers1) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
   let(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(student_credentials) }
+  let(:headers_sad) { { HTTP_ACCEPT: 'application/json' } }
 
   before do
   	FactoryBot.create(:user, email: 'hey@gmail.com', student: true)
@@ -24,5 +25,11 @@ RSpec.describe Api::V1::ClassroomController, type: :request do
       expected_response = eval(file_fixture('user_classrooms.txt').read)
       expect(response_json).to eq expected_response.as_json
     end
+
+    it "should raise error if user is not signed in" do
+      get "/api/v1/classroom", headers: headers_sad
+
+      expect(response_json["errors"][0]).to eq "You need to sign in or sign up before continuing."
+	end
   end
 end
