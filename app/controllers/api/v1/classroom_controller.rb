@@ -26,6 +26,19 @@ class Api::V1::ClassroomController < ApplicationController
     end
   end
 
+  def index
+    if current_api_v1_user.student
+      classrooms = []
+      Student.where(:user_id => current_api_v1_user.id).each do |student|
+        classrooms << student.classroom
+      end
+      render json: classrooms, each_serializer: ClassroomSerializer
+    else
+      classrooms = current_api_v1_user.classrooms
+      render json: classrooms, each_serializer: ClassroomSerializer
+    end
+  end
+
   private
 
   def classroom_params 
