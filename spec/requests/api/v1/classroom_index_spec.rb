@@ -26,7 +26,7 @@ RSpec.describe Api::V1::ClassroomController, type: :request do
       expect(response_json).to eq expected_response.as_json
     end
 
-    it "should raise error if user is not signed in" do
+    it "should not return classes if user is not signed in" do
       get "/api/v1/classroom", headers: headers_sad
 
       expect(response_json["errors"][0]).to eq "You need to sign in or sign up before continuing."
