@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     end
     namespace :v1, defaults: { format: :json } do
       mount_devise_token_auth_for 'User', at: 'auth'
+      resources :classroom, only: [:create, :destroy, :update]
     end
   end
 end
