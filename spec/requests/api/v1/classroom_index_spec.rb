@@ -15,14 +15,14 @@ RSpec.describe Api::V1::ClassroomController, type: :request do
     it "should return all classes for a user that is a teacher" do
       get "/api/v1/classroom", headers: headers1
       
-      expected_response = eval(file_fixture('user_classrooms.txt').read)
+      expected_response = eval(file_fixture('user_classroom_index.txt').read)
       expect(response_json).to eq expected_response.as_json
     end
 
     it "should return all classes for a user that is a student" do
       get "/api/v1/classroom", headers: headers2
       
-      expected_response = eval(file_fixture('user_classrooms.txt').read)
+      expected_response = eval(file_fixture('user_classroom_index.txt').read)
       expect(response_json).to eq expected_response.as_json
     end
 
@@ -30,6 +30,21 @@ RSpec.describe Api::V1::ClassroomController, type: :request do
       get "/api/v1/classroom", headers: headers_sad
 
       expect(response_json["errors"][0]).to eq "You need to sign in or sign up before continuing."
-	end
+	  end
   end
+
+  describe "GET /api/v1/classroom/:id" do
+    it "should return a specific classroom for a user" do
+      get "/api/v1/classroom/#{Classroom.first.id}", headers: headers1
+
+      expected_response = eval(file_fixture('user_classroom_show.txt').read)
+      expect(response_json).to eq expected_response.as_json
+    end
+
+    it "should not return classes if user is not signed in" do
+      get "/api/v1/classroom/#{Classroom.first.id}", headers: headers_sad
+
+      expect(response_json["errors"][0]).to eq "You need to sign in or sign up before continuing."
+    end
+  end 
 end
