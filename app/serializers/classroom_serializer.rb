@@ -6,6 +6,6 @@ class ClassroomSerializer < ActiveModel::Serializer
   end
 
   def student_count
-  	object.students.count
+    object.students.count
   end
 end

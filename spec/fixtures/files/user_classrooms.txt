@@ -1,1 +1,0 @@
-[{"id"=>Classroom.first.id, "grade"=>10, "name"=>"Math", "teacher"=>"#{Classroom.first.teacher.name}", "student_count"=>1}]

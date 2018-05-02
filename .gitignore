@@ -13,6 +13,7 @@
 !/log/.keep
 !/tmp/.keep
 coverage
+.idea
 .env
 
 .byebug_history
