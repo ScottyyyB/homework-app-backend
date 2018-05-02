@@ -37,6 +37,7 @@ RSpec.describe Api::V1::ClassroomController, type: :request do
     it "should return a specific classroom for a user" do
       get "/api/v1/classroom/#{Classroom.first.id}", headers: headers1
 
+      binding.pry
       expected_response = eval(file_fixture('user_classroom_show.txt').read)
       expect(response_json).to eq expected_response.as_json
     end

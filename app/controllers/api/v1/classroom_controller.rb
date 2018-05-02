@@ -43,7 +43,7 @@ class Api::V1::ClassroomController < ApplicationController
 
   def show
     classroom = Classroom.find(params[:id])
-    render json: classroom, serializer: ClassroomSerializer
+    render json: classroom, serializer: ClassroomShowSerializer
   end
 
   private
