@@ -9,7 +9,7 @@ RSpec.describe "Sessions", type: :request do
       }, headers: headers
 
       expect(response.status).to eq 200
-      expect(response_json["token"]).to eq User.first.auth_token
+      expect(response_json).to eq "token"=>"#{User.first.auth_token}", "username"=>"#{User.first.username}"
     end
 
     it "successfully logs out user" do

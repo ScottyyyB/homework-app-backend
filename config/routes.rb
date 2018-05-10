@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     namespace :v1, defaults: { format: :json } do
       post '/login' => "sessions#create"
       delete '/logout' => "sessions#destroy"
-      resources :classroom, only: [:create, :destroy, :update, :index, :show]
+      resources :users, only: [:create]
+      resources :classrooms, only: [:create, :destroy, :update, :index, :show]
     end
   end
 end

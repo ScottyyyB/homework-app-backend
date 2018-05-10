@@ -1,4 +1,4 @@
-RSpec.describe Api::V1::ClassroomController, type: :request do
+RSpec.describe Api::V1::ClassroomsController, type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:credentials) { user.create_new_auth_token }
   let(:headers) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials) }

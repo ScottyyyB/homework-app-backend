@@ -1,4 +1,4 @@
-class Api::V1::ClassroomController < ApplicationController
+class Api::V1::ClassroomsController < ApplicationController
   before_action :authenticate_api_v1_user!
 
   def create

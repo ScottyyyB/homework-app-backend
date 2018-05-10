@@ -1,1 +1,0 @@
-{"token"=>"#{User.first.auth_token}"}

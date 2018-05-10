@@ -23,7 +23,7 @@ class Api::V1::SessionsController < ApiController
   end
 
   def send_token_for_valid_login_of(user)
-  	render json: { token: user.auth_token }, status: 200
+  	render json: { token: user.auth_token, username: user.username }, status: 200
   end
 
   def logout

@@ -1,24 +1,27 @@
-RSpec.describe "User Registration", type: :request do
+
+RSpec.describe Api::V1::UsersController, type: :request do
   let(:headers) { { HTTP_ACCEPT: "application/json" } }
   before do
-    FactoryBot.create(:user, name: "John Cena")
+    FactoryBot.create(:user, username: "John Cena")
   end
   
   context "with valid credentials" do
     it "successfully creates a user" do
-      post "/api/v1/auth", params: {
-        name: "Dan James", email: "hey@gmail.com",
-        password: "rightright", password_confirmation: "rightright"
+      post "/api/v1/users", params: {
+        user: {
+          username: "Dan James", email: "hey@gmail.com",
+          password: "rightright"
+        }
       }, headers: headers
 
-      expect(response_json["status"]).to eq "success"
       expect(response.status).to eq 200
+      expect(response_json).to eq "token"=>"#{User.second.auth_token}", "username"=>"#{User.second.username}"
     end
   end
 
   context "without valid credentials" do
     it "does not create user if name is not present" do
-      post "/api/v1/auth", params: {
+      post "/api/v1/users", params: {
         email: "hey@gmail.com",
         password: "rightright", password_confirmation: "rightright"
       }, headers: headers
@@ -28,7 +31,7 @@ RSpec.describe "User Registration", type: :request do
     end
 
     it "does not create user if email is not present" do
-      post "/api/v1/auth", params: {
+      post "/api/v1/users", params: {
         name: "Toby George",
         password: "rightright", password_confirmation: "rightright"
       }, headers: headers
@@ -38,7 +41,7 @@ RSpec.describe "User Registration", type: :request do
     end
 
     it "does not create user if name has been taken" do
-      post "/api/v1/auth", params: {
+      post "/api/v1/users", params: {
         name: "John Cena", email: "hey@gmail.com",
         password: "rightright", password_confirmation: "rightright"
       }, headers: headers
@@ -48,7 +51,7 @@ RSpec.describe "User Registration", type: :request do
     end
 
     it "does not create user if email has been taken" do
-      post "/api/v1/auth", params: {
+      post "/api/v1/users", params: {
         name: "Toby George", email: "random@gmail.com",
         password: "rightright", password_confirmation: "rightright"
       }, headers: headers
@@ -58,7 +61,7 @@ RSpec.describe "User Registration", type: :request do
     end
 
     it "does not create user if password_confirmation does not match password" do
-      post "/api/v1/auth", params: {
+      post "/api/v1/users", params: {
         name: "Toby George", email: "hey@gmail.com",
         password: "rightright", password_confirmation: "doggydoggy"
       }, headers: headers
