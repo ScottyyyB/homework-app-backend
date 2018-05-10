@@ -1,7 +1,6 @@
 RSpec.describe Api::V1::ClassroomsController, type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:headers) { { HTTP_ACCEPT: 'application/json', "Authorization": "Token #{user.auth_token}" } }
-  let(:headers_sad) { { HTTP_ACCEPT: 'application/json' } }
 
   before do
      FactoryBot.create(:user, email: "bye@gmail.com")
