@@ -12,6 +12,8 @@ gem 'rails', '~> 5.1.5'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 gem 'bcrypt'
+gem 'email_validator'
+
 
 group :development, :test do
 	gem 'pry-byebug'

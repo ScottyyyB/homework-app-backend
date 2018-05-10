@@ -1,11 +1,10 @@
 RSpec.describe "Sessions", type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:headers) { {  HTTP_ACCEPT: 'application/json' } }
-
   context "valid credentials & logout" do
     it "successfully logs in user" do
       post "/api/v1/login", params: {
-      	username: user.username, password: user.password      
+      	username: user.username, password: user.password 
       }, headers: headers
 
       expect(response.status).to eq 200
