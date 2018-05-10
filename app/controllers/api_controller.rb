@@ -2,7 +2,7 @@ class ApiController < ApplicationController
   before_action :current_user
   
   def require_login
-  	authenticate_token || render_unauthorized("Access Denied")
+  	authenticate_token || render_unauthorized("You need to sign in or sign up before continuing.")
   end
 
   def current_user

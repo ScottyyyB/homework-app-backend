@@ -36,7 +36,7 @@ class Api::V1::ClassroomsController < ApiController
       end
       render json: classrooms, each_serializer: ClassroomSerializer
     else
-      classrooms = current_api_v1_user.classrooms
+      classrooms = current_user.classrooms
       render json: classrooms, each_serializer: ClassroomSerializer
     end
   end
