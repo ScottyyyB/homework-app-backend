@@ -1,4 +1,6 @@
 class ApiController < ApplicationController
+  before_action :current_user
+  
   def require_login
   	authenticate_token || render_unauthorized("Access Denied")
   end

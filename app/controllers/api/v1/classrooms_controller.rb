@@ -1,5 +1,5 @@
 class Api::V1::ClassroomsController < ApiController
-  before_action :require_login, :current_user
+  before_action :require_login
 
   def create
   	classroom = current_user.classrooms.new(classroom_params)

@@ -1,6 +1,5 @@
 class Api::V1::SessionsController < ApiController
   skip_before_action :require_login, only: [:create], raise: false
-  before_action :current_user, only: [:logout]
 
   def create
   	if user = User.validate_login(params[:username], params[:password])
