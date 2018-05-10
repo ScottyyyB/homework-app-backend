@@ -1,8 +1,8 @@
-class Api::V1::ClassroomsController < ApplicationController
-  before_action :authenticate_api_v1_user!
+class Api::V1::ClassroomsController < ApiController
+  before_action :require_login, :current_user
 
   def create
-  	classroom = current_api_v1_user.classrooms.new(classroom_params)
+  	classroom = current_user.classrooms.new(classroom_params)
   	if classroom.save
       render status: 200
     else
@@ -29,9 +29,9 @@ class Api::V1::ClassroomsController < ApplicationController
   end
 
   def index
-    if current_api_v1_user.student
+    if current_user.student
       classrooms = []
-      Student.where(:user_id => current_api_v1_user.id).each do |student|
+      Student.where(:user_id => current_user.id).each do |student|
         classrooms << student.classroom
       end
       render json: classrooms, each_serializer: ClassroomSerializer
