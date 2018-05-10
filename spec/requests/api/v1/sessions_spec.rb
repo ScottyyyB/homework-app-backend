@@ -1,22 +1,19 @@
-RSpec.describe "User Sessions", type: :request do
+RSpec.describe "Sessions", type: :request do
   let(:user) { FactoryBot.create(:user) }
-  let(:credentials) { user.create_new_auth_token }
   let(:headers) { {  HTTP_ACCEPT: 'application/json' } }
-  let(:headers2) { {  HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
-
+  
   context "valid credentials & logout" do
     it "successfully logs in user" do
-      post "/api/v1/auth/sign_in", params: {
-      	email: user.email, password: user.password      
+      post "/api/v1/login", params: {
+      	username: user.username, password: user.password 
       }, headers: headers
 
       expect(response.status).to eq 200
-      expected_response = eval(file_fixture('success_login.txt').read)
-      expect(response_json).to eq expected_response.as_json
+      expect(response_json).to eq "token"=>"#{User.first.auth_token}", "username"=>"#{User.first.username}"
     end
 
     it "successfully logs out user" do
-      delete "/api/v1/auth/sign_out", headers: headers2
+      delete "/api/v1/logout", headers: headers.merge!("Authorization": "Token #{user.auth_token}")
 
       expect(response.status).to eq 200
     end
@@ -24,21 +21,21 @@ RSpec.describe "User Sessions", type: :request do
 
   context "without valid credentials" do
   	it "does not login user if email is incorrect" do
-      post "/api/v1/auth/sign_in", params: {
+      post "/api/v1/login", params: {
       	email: "ran@gmail.com", password: user.password
       }, headers: headers
 
       expect(response.status).to eq 401
-      expect(response_json["errors"][0]).to eq "Invalid login credentials. Please try again."
+      expect(response_json["errors"][0]["detail"]).to eq "Error with username or password"
   	end
 
   	it "does not login user if password is incorrect" do
-      post "/api/v1/auth/sign_in", params: {
+      post "/api/v1/login", params: {
       	email: user.email, password: "rightright"      
       }, headers: headers
 
       expect(response.status).to eq 401
-      expect(response_json["errors"][0]).to eq "Invalid login credentials. Please try again."
+      expect(response_json["errors"][0]["detail"]).to eq "Error with username or password"
   	end
   end
 end

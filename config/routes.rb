@@ -4,8 +4,10 @@ Rails.application.routes.draw do
       resources :ping, only: [:index], constrains: { format: 'json' }
     end
     namespace :v1, defaults: { format: :json } do
-      mount_devise_token_auth_for 'User', at: 'auth'
-      resources :classroom, only: [:create, :destroy, :update, :index, :show]
+      post '/login' => "sessions#create"
+      delete '/logout' => "sessions#destroy"
+      resources :users, only: [:create]
+      resources :classrooms, only: [:create, :destroy, :update, :index, :show]
     end
   end
 end

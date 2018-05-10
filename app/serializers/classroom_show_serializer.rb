@@ -3,6 +3,6 @@ class ClassroomShowSerializer < ActiveModel::Serializer
   has_many :users
 
   def teacher
-    object.teacher.name
+    object.teacher.username
   end
 end
