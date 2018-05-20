@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180505175627) do
+ActiveRecord::Schema.define(version: 20180520134307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,21 @@ ActiveRecord::Schema.define(version: 20180505175627) do
     t.integer "teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "homework", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "title"
+    t.string "link"
+    t.date "due_date"
+    t.string "category"
+    t.string "status", default: "Pending"
+    t.integer "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "classroom_id"
+    t.index ["classroom_id"], name: "index_homework_on_classroom_id"
+    t.index ["user_id"], name: "index_homework_on_user_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -41,6 +56,8 @@ ActiveRecord::Schema.define(version: 20180505175627) do
     t.boolean "student", default: false
   end
 
+  add_foreign_key "homework", "classrooms"
+  add_foreign_key "homework", "users"
   add_foreign_key "students", "classrooms"
   add_foreign_key "students", "users"
 end

@@ -30,4 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        homework:
+          attributes:
+            category:
+              inclusion: "must be either: Assignment, WorkSheet or Study"
