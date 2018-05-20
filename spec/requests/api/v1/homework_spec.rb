@@ -63,20 +63,6 @@ RSpec.describe Api::V1::HomeworkController, type: :request do
         expect(response_json["errors"][0]).to eq "Category must be either: Assignment, WorkSheet or Study"
         expect(response.status).to eq 200
       end
-
-      it "does not create if classroom is blank" do
-        post "/api/v1/homework", params: {
-          homework: 
-          { title: "Case Study", link: "google-drive",
-            due_date: "#{Date.tomorrow}", category: "Worksheet", teacher_id: User.first.id,
-            classroom_id: ""
-          }
-        }, headers: headers.merge("Authorization": "Token #{User.first.auth_token}") 
-
-        binding.pry
-        expect(response_json["errors"][0]).to eq "User must exist"
-        expect(response.status).to eq 200
-      end
     end
   end
 end

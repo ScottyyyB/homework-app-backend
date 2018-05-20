@@ -2,7 +2,6 @@ class Api::V1::ClassroomsController < ApiController
   before_action :require_login
 
   def create
-    binding.pry
   	classroom = current_user.classrooms.new(classroom_params)
   	if classroom.save
       render status: 200

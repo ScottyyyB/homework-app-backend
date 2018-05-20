@@ -12,12 +12,15 @@ RSpec.describe Homework, type: :model do
   	it { is_expected.to validate_presence_of :title }
   	it { is_expected.to validate_presence_of :link }
   	it { is_expected.to validate_presence_of :due_date }
-  	it { is_expected.to validate_inclusion_of(Homework::VALID_STATUS).in? :status }
-    it { is_expected.to validate_inclusion_of(Homework::VALID_CATEGORIES).in? :category }
+    it { is_expected.to validate_presence_of :teacher_id }
+    it { is_expected.to validate_inclusion_of(:status).in_array(Homework::VALID_STATUS)}
+    it { is_expected.to validate_inclusion_of(:category).in_array(Homework::VALID_CATEGORIES) }
 
   end
 
   describe 'Relations' do
     it { is_expected.to belong_to :user }
+    it { is_expected.to belong_to :teacher }
+    it { is_expected.to belong_to :classroom }
   end
 end

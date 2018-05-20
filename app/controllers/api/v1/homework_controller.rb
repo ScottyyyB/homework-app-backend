@@ -3,7 +3,7 @@ class Api::V1::HomeworkController < ApiController
   
   def create
     homework = []
-  	classroom ||= Classroom.find(params[:homework][:classroom_id])
+  	classroom = Classroom.find(params[:homework][:classroom_id])
     classroom.students.each do |student|
       homework << classroom.homework.new(homework_params.merge(user_id: student.user_id))
     end

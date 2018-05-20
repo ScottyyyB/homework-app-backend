@@ -5,6 +5,5 @@ FactoryBot.define do
   	email "random@gmail.com"
   	username {Faker::Name.first_name}
   	password "password"
-  	student true
   end
 end
