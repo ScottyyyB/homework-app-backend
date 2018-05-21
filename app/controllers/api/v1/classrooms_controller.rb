@@ -1,5 +1,6 @@
 class Api::V1::ClassroomsController < ApiController
   before_action :require_login
+  before_action :classroom, only: [:destroy, :update, :show]
 
   def create
   	classroom = current_user.classrooms.new(classroom_params)
@@ -12,18 +13,16 @@ class Api::V1::ClassroomsController < ApiController
   end
 
   def destroy
-    classroom = Classroom.find(params[:id])
-    classroom.students.each { |student| student.delete }
-    classroom.delete
+    @classroom.students.each { |student| student.delete }
+    @classroom.delete
     render status: 200
   end
 
   def update
-    classroom = Classroom.find(params[:id])
-    if classroom.update(classroom_params) 
+    if @classroom.update(classroom_params) 
       render status: 200
     else
-       render json: { errors: classroom.errors.full_messages},
+       render json: { errors: @classroom.errors.full_messages},
               status: 422
     end
   end
@@ -42,13 +41,16 @@ class Api::V1::ClassroomsController < ApiController
   end
 
   def show
-    classroom = Classroom.find(params[:id])
-    render json: classroom, serializer: ClassroomShowSerializer
+    render json: @classroom, serializer: ClassroomShowSerializer
   end
 
   private
 
   def classroom_params 
     params.require(:classroom).permit!
+  end
+
+  def classroom
+    @classroom = Classroom.find(params[:id])
   end
 end

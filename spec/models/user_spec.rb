@@ -18,6 +18,11 @@ RSpec.describe User, type: :model do
   	it { is_expected.to validate_inclusion_of(:teacher).in_array([true, false]) }
   	it { is_expected.to validate_inclusion_of(:student).in_array([true, false]) }
   end
+
+  describe 'Relations' do
+    it { is_expected.to have_many :homework }
+  end
+  
   context "should be invalid" do
     emails = [ 'afg@afcom', '@example.com', 'something @ something. com']
     emails.each do |email|

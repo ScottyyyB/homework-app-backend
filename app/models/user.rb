@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :classrooms, foreign_key: :teacher_id
-  
+  has_many :homework
+
   validates :email, email: true
   validates :username, :email, uniqueness: true
   validates :username, presence: true
