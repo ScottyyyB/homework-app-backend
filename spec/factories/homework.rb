@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :homework do
     title "MyString"
     link "MyLink"
-    due_date "2018-05-15"
+    due_date {Date.tomorrow}
     category "Worksheet"
   end
 end

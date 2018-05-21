@@ -10,7 +10,23 @@ class Api::V1::HomeworkController < ApiController
     if homework.all? { |obj| obj.save }
       render status: 200
     else
-      render json: { errors: homework[0].errors.full_messages }
+      render json: { errors: homework[0].errors.full_messages },
+             status: 422
+    end
+  end
+
+  def destroy
+    homework = Homework.find(params[:id])
+    homework.delete and render status: 200
+  end
+
+  def update
+    homework = Homework.find(params[:id])
+    if homework.update(homework_params)
+      render status: 200
+    else
+      render json: { errors: homework.errors.full_messages },
+             status: 422
     end
   end
 

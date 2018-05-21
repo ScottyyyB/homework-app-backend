@@ -36,4 +36,4 @@ en:
         homework:
           attributes:
             category:
-              inclusion: "must be either: Assignment, WorkSheet or Study"
+              inclusion: "must be either: Assignment, Worksheet or Study"
