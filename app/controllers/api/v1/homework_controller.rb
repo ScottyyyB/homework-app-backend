@@ -1,5 +1,6 @@
 class Api::V1::HomeworkController < ApiController
   before_action :require_login
+  before_action :homework, only: [:destroy, :update]
   
   def create
     homework = []
@@ -16,16 +17,14 @@ class Api::V1::HomeworkController < ApiController
   end
 
   def destroy
-    homework = Homework.find(params[:id])
-    homework.delete and render status: 200
+    @homework.delete and render status: 200
   end
 
   def update
-    homework = Homework.find(params[:id])
-    if homework.update(homework_params)
+    if @homework.update(homework_params)
       render status: 200
     else
-      render json: { errors: homework.errors.full_messages },
+      render json: { errors: @homework.errors.full_messages },
              status: 422
     end
   end
@@ -34,5 +33,9 @@ class Api::V1::HomeworkController < ApiController
 
   def homework_params
     params.require(:homework).permit!
+  end
+
+  def homework
+    @homework = Homework.find(params[:id])
   end
 end
