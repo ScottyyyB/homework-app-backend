@@ -1,0 +1,4 @@
+[{"id"=>Homework.first.id, "title"=>"MyString", "category"=>"Worksheet", "due_date"=>"#{Date.tomorrow}"},
+ {"id"=>Homework.second.id, "title"=>"MyString", "category"=>"Worksheet", "due_date"=>"#{Date.tomorrow}"},
+ {"id"=>Homework.third.id, "title"=>"MyString", "category"=>"Worksheet", "due_date"=>"#{Date.tomorrow}"},
+ {"id"=>Homework.fourth.id, "title"=>"MyString", "category"=>"Worksheet", "due_date"=>"#{Date.tomorrow}"}]

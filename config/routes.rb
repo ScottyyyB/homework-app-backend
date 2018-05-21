@@ -7,8 +7,9 @@ Rails.application.routes.draw do
       post '/login' => "sessions#create"
       delete '/logout' => "sessions#destroy"
       resources :users, only: [:create]
-      resources :classrooms, only: [:create, :destroy, :update, :index, :show]
-      resources :homework, only: [:create, :destroy, :update]
+      resources :classrooms, only: [:create, :destroy, :update, :index, :show] do
+        resources :homework, only: [:create, :destroy, :update, :index]
+      end
     end
   end
 end

@@ -1,12 +1,13 @@
 class Api::V1::HomeworkController < ApiController
   before_action :require_login
   before_action :homework, only: [:destroy, :update]
+  before_action :classroom
   
   def create
     homework = []
-  	classroom = Classroom.find(params[:homework][:classroom_id])
-    classroom.students.each do |student|
-      homework << classroom.homework.new(homework_params.merge(user_id: student.user_id))
+  	@classroom = Classroom.find(params[:classroom_id])
+    @classroom.students.each do |student|
+      homework << @classroom.homework.new(homework_params.merge(user_id: student.user_id))
     end
     if homework.all? { |obj| obj.save }
       render status: 200
@@ -29,6 +30,12 @@ class Api::V1::HomeworkController < ApiController
     end
   end
 
+  def index
+    homework = @classroom.homework.select { |obj| obj.status == params[:status] }
+    render json: homework, each_serializer: HomeworkSerializer,
+           status: 200
+  end
+
   private
 
   def homework_params
@@ -37,5 +44,9 @@ class Api::V1::HomeworkController < ApiController
 
   def homework
     @homework = Homework.find(params[:id])
+  end
+
+  def classroom
+    @classroom = Classroom.find(params[:classroom_id])
   end
 end
