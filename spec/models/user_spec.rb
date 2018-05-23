@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_db_column :auth_token }
   	it { is_expected.to have_db_column :password_digest }
     it { is_expected.to have_db_column :student }
+    it { is_expected.to have_db_column :grade }
   end
 
   describe "Validations" do
@@ -17,6 +18,15 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_uniqueness_of :email }
   	it { is_expected.to validate_inclusion_of(:teacher).in_array([true, false]) }
   	it { is_expected.to validate_inclusion_of(:student).in_array([true, false]) }
+    
+    context "validate grade if student" do
+      before { allow(subject).to receive(:student?).and_return(true) }
+      it { is_expected.to validate_presence_of :grade }
+    end
+
+    context "not validate grade otherwise" do
+      it { is_expected.not_to validate_presence_of :grade }
+    end
   end
 
   describe 'Relations' do

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   validates :email, email: true
   validates :username, :email, uniqueness: true
   validates :username, presence: true
+  validates :grade, presence: true, if: :student?
   validates :teacher, :student, inclusion: { in: [true, false] }
 
   has_secure_password

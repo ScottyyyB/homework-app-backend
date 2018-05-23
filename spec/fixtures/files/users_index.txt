@@ -1,0 +1,1 @@
+[{"id"=>User.second.id, "username"=>"#{User.second.username}", "grade"=>10}]

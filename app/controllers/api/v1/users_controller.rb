@@ -8,6 +8,12 @@ class Api::V1::UsersController < ApiController
   	end
   end
 
+  def index
+    users = User.all.select { |user| user[params[:type]] }
+    render json: users, each_serializer: UserIndexSerializer,
+           status: 200
+  end
+
   private
 
   def user_params
