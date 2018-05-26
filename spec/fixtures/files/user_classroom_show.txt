@@ -1,5 +1,5 @@
 {"id"=>Classroom.first.id,
  "grade"=>10,
  "name"=>"Math",
- "teacher"=>"#{Classroom.first.teacher.username}",
- "users"=>[{"id"=>User.first.id, "username"=>"#{User.first.username}", "email"=>"hey@gmail.com"}]}
+ "teacher"=>"#{Classroom.first.teacher.name}",
+ "users"=>[{"id"=>User.first.id, "name"=>"#{User.first.name}", "email"=>"hey@gmail.com"}]}

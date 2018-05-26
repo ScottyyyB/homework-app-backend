@@ -2,11 +2,11 @@ class Api::V1::SessionsController < ApiController
   skip_before_action :require_login, only: [:create], raise: false
 
   def create
-  	if user = User.validate_login(params[:username], params[:password])
+  	if user = User.validate_login(params[:name], params[:password])
   		allow_token_to_be_used_only_once_for(user)
   		send_token_for_valid_login_of(user)
   	else
-      render_unauthorized("Error with username or password")
+      render_unauthorized("Error with name or password")
   	end
   end
 
@@ -22,10 +22,10 @@ class Api::V1::SessionsController < ApiController
   end
 
   def send_token_for_valid_login_of(user)
-  	render json: { token: user.auth_token, username: user.username }, status: 200
+  	render json: { token: user.auth_token, name: user.name }, status: 200
   end
 
   def logout
-  	current_user.invalidate_token 
-  end	
+    current_user.invalidate_token
+  end 
 end

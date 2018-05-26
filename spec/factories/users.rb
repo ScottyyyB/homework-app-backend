@@ -3,8 +3,8 @@ require 'faker'
 FactoryBot.define do
   factory :user do
   	email "random@gmail.com"
-  	username {Faker::Name.first_name}
+  	name { "#{Faker::Name.last_name} #{Faker::Name.first_name}" }
   	password "password"
-  	grade 10
+  	grade 9
   end
 end

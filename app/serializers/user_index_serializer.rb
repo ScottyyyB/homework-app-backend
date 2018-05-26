@@ -1,3 +1,3 @@
 class UserIndexSerializer < ActiveModel::Serializer
-  attributes :id, :username, :grade
+  attributes :id, :name, :grade
 end
