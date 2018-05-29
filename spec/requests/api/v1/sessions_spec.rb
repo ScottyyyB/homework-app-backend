@@ -25,7 +25,6 @@ RSpec.describe "Sessions", type: :request do
       	email: "ran@gmail.com", password: user.password
       }, headers: headers
 
-      binding.pry
       expect(response.status).to eq 422
       expect(response_json["errors"][0]["detail"]).to eq "Error with name or password"
 

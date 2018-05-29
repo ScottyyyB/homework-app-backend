@@ -1,1 +1,1 @@
-[{"id"=>User.third.id, "name"=>"Ale Bob", "grade"=>10}, {"id"=>User.second.id, "name"=>"Mist Bob", "grade"=>10}]
+[{"id"=>User.fourth.id, "name"=>"Ale Bob", "grade"=>10, "student"=>true}, {"id"=>User.third.id, "name"=>"Mist Bob", "grade"=>10, "student"=>true}]

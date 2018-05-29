@@ -1,3 +1,5 @@
-[{"id"=>User.last.id, "name"=>"#{User.last.name}", "grade"=>9},
- {"id"=>User.third.id, "name"=>"Ale Bob", "grade"=>10},
- {"id"=>User.second.id, "name"=>"Mist Bob", "grade"=>10}]
+[{"id"=>User.second.id, "name"=>"Jones Bob", "grade"=>nil, "student"=>false},
+ {"id"=>User.first.id, "name"=>"Murphy Joe", "grade"=>nil, "student"=>false},
+ {"id"=>User.fifth.id, "name"=>"#{User.fifth.name}", "grade"=>9, "student"=>true},
+ {"id"=>User.fourth.id, "name"=>"Ale Bob", "grade"=>10, "student"=>true},
+ {"id"=>User.third.id, "name"=>"Mist Bob", "grade"=>10, "student"=>true}]

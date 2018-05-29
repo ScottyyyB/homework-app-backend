@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
   validates :name, :email, uniqueness: true
   validates :name, presence: true
   validates :grade, presence: true, if: :student?
-  validates :teacher, :student, inclusion: { in: [true, false] }
+  validates :teacher, inclusion: { in: [false] }, if: :student?
+  validates :student, inclusion: { in: [false] }, if: :teacher?
+
 
   has_secure_password
   has_secure_token :auth_token

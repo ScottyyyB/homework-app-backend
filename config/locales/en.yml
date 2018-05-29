@@ -37,3 +37,12 @@ en:
           attributes:
             category:
               inclusion: "must be either: Assignment, Worksheet or Study"
+        user:
+          attributes:
+            teacher:
+              inclusion: "must be false if student is true"
+            student:
+              inclusion: "must be false if teacher is true"
+
+
+

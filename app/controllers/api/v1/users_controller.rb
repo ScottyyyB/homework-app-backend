@@ -9,8 +9,9 @@ class Api::V1::UsersController < ApiController
   end
 
   def index
-    users = User.all.select { |user| user[params[:type]] }
-    users.sort! { |a, b| [a.grade, a.name[0]] <=> [b.grade, b.name[0]] }
+    users = User.all.select { |user| user }  
+    users = User.all.select { |user| user[params[:type]] } if params[:type]
+    users.sort! { |a, b| [a.grade || 0, a.name[0]] <=> [b.grade || 0, b.name[0]] }
     users.select! { |user| user.grade == params[:grade].to_i } if params[:grade]
     render json: users, each_serializer: UserIndexSerializer,
            status: 200
