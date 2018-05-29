@@ -5,11 +5,11 @@ RSpec.describe "Sessions", type: :request do
   context "valid credentials & logout" do
     it "successfully logs in user" do
       post "/api/v1/login", params: {
-      	username: user.username, password: user.password 
+      	name: user.name, password: user.password 
       }, headers: headers
 
       expect(response.status).to eq 200
-      expect(response_json).to eq "token"=>"#{User.first.auth_token}", "username"=>"#{User.first.username}"
+      expect(response_json).to eq "token"=>"#{User.first.auth_token}", "name"=>"#{User.first.name}"
     end
 
     it "successfully logs out user" do
@@ -25,8 +25,9 @@ RSpec.describe "Sessions", type: :request do
       	email: "ran@gmail.com", password: user.password
       }, headers: headers
 
-      expect(response.status).to eq 401
-      expect(response_json["errors"][0]["detail"]).to eq "Error with username or password"
+      expect(response.status).to eq 422
+      expect(response_json["errors"][0]["detail"]).to eq "Error with name or password"
+
   	end
 
   	it "does not login user if password is incorrect" do
@@ -34,8 +35,8 @@ RSpec.describe "Sessions", type: :request do
       	email: user.email, password: "rightright"      
       }, headers: headers
 
-      expect(response.status).to eq 401
-      expect(response_json["errors"][0]["detail"]).to eq "Error with username or password"
+      expect(response.status).to eq 422
+      expect(response_json["errors"][0]["detail"]).to eq "Error with name or password"
   	end
   end
 end

@@ -1,0 +1,1 @@
+[{"id"=>User.second.id, "name"=>"Jones Bob", "grade"=>nil, "student"=>false}, {"id"=>User.first.id, "name"=>"Murphy Joe", "grade"=>nil, "student"=>false}]

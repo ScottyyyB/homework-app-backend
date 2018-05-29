@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe "DB Table" do
   	it { is_expected.to have_db_column :id }
-  	it { is_expected.to have_db_column :username }
+  	it { is_expected.to have_db_column :name }
     it { is_expected.to have_db_column :email }
     it { is_expected.to have_db_column :auth_token }
   	it { is_expected.to have_db_column :password_digest }
@@ -13,8 +13,8 @@ RSpec.describe User, type: :model do
 
   describe "Validations" do
   	it { is_expected.to validate_presence_of :password }
-  	it { is_expected.to validate_presence_of :username }
-    it { is_expected.to validate_uniqueness_of :username }
+  	it { is_expected.to validate_presence_of :name }
+    it { is_expected.to validate_uniqueness_of :name }
     it { is_expected.to validate_uniqueness_of :email }
   	it { is_expected.to validate_inclusion_of(:teacher).in_array([true, false]) }
   	it { is_expected.to validate_inclusion_of(:student).in_array([true, false]) }

@@ -2,4 +2,4 @@
  "grade"=>10,
  "name"=>"Math",
  "student_count"=>1,
- "teacher"=>"#{Classroom.first.teacher.username}"}]
+ "teacher"=>"#{Classroom.first.teacher.name}"}]

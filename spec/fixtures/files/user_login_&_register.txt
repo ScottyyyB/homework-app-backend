@@ -1,1 +1,1 @@
-{"token"=>"#{User.second.auth_token}", "username"=>"#{User.first.username}"}
+{"token"=>"#{User.second.auth_token}", "name"=>"#{User.first.username}"}

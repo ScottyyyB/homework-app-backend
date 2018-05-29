@@ -3,10 +3,12 @@ class User < ActiveRecord::Base
   has_many :homework
 
   validates :email, email: true
-  validates :username, :email, uniqueness: true
-  validates :username, presence: true
+  validates :name, :email, uniqueness: true
+  validates :name, presence: true
   validates :grade, presence: true, if: :student?
-  validates :teacher, :student, inclusion: { in: [true, false] }
+  validates :teacher, inclusion: { in: [false] }, if: :student?
+  validates :student, inclusion: { in: [false] }, if: :teacher?
+
 
   has_secure_password
   has_secure_token :auth_token
@@ -15,8 +17,8 @@ class User < ActiveRecord::Base
     self.update_columns(auth_token: nil)
   end
 
-  def self.validate_login(username, password)
-    user = find_by(username: username)
+  def self.validate_login(name, password)
+    user = find_by(name: name)
     if user && user.authenticate(password)
       user
   	end
